@@ -1,0 +1,44 @@
+<section id="tag-list">
+  <div class="categories">
+    <!-- prettier-ignore -->
+
+    {% assign CATEGORY = "" | split: ',' %} 
+    {% for post in site.posts %} 
+        {% for c in post.categories %} 
+            {% assign CATEGORY = CATEGORY | push: c %} 
+        {% endfor %} 
+    {% endfor %}
+    <!-- collect tag -->
+    {% assign CATEGORYS = CATEGORY | uniq %}
+
+    <!-- tag add -->
+    {% for c in CATEGORYS %}
+
+    <a href="#!" data-base-url="{{site.baseurl}}" class="category"> {{c}} </a>
+    <div id="{{c}}" class="category_count">()</div>
+    {% endfor %}
+
+    <script>
+      var js_categories = {{CATEGORY|split:','|join:','}};
+      var js_category_list = {{CATEGORYS|split:','|join:','}};
+
+      let js_category = {};
+      // js_category를 js_category_list로 초기화
+      js_category_list.forEach(category => {
+        js_category[category] = 0;
+      });
+
+      // js_categories에서 각 카테고리의 발생 횟수 계산
+      js_categories.forEach(category => {
+        if (js_category.hasOwnProperty(category)) {
+          js_category[category]++;
+        }
+      });
+      for (var now in js_category) {
+        var text = "(" + js_category[now] + ")";
+        document.getElementById(now).innerText =text;
+      }
+      //
+    </script>
+  </div>
+</section>
