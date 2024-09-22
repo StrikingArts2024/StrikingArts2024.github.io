@@ -20,6 +20,7 @@ body {
   line-height: 2rem;
   background-color: var(--gray-5);
 }
+
 header {
   padding: 2rem 0 4rem 0;
   display: flex;
